@@ -1,0 +1,73 @@
+<div class="courses-containers">
+  <div class="courses-list">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> Listing List </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- COURSES LIST -->
+        <mat-list>
+          <mat-list-item
+            *ngFor="let listing of listings"
+            (click)="selectListing(listing)"
+          >
+            <h3 matLine>{{ listing.name | titlecase }}</h3>
+            <p matLine>{{ listing.console }}</p>
+            <button mat-icon-button color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="course-details">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> Select Listing </mat-card-title>
+      </mat-card-header>
+      <form #form="ngForm" (submit)="saveListing(selectedListing)">
+        <mat-card-content>
+          <!-- COURSE FORM -->
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Name"
+              [(ngModel)]="selectedListing.name"
+              name="name"
+            />
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Description"
+              [(ngModel)]="selectedListing.description"
+              name="description"
+            />
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Price"
+              [(ngModel)]="selectedListing.price"
+              name="price"
+            />
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- COURSE ACTIONS -->
+          <button
+            type="submit"
+            [disabled]="form.invalid"
+            mat-button
+            color="primary"
+          >
+            Save
+          </button>
+          <button type="button" mat-button (click)="reset()">Cancel</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+</div>
